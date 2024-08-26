@@ -1,9 +1,9 @@
 const TodoModel = require("../models/Todo.model");
 
-exports.deleteTodo = async (req, res) => {
+exports.getTodoById = async (req, res) => {
     try {
         const id = req.params.id;
-        const todo = await TodoModel.findByIdAndDelete(id);
+        const todo = await TodoModel.findById({ _id: id });
         if (!todo) {
             return res.status(404).json(
                 {
@@ -16,15 +16,14 @@ exports.deleteTodo = async (req, res) => {
         res.status(200).json(
             {
                 success: true,
-                message: "deleted successfully"
+                message: "data fetched for id successfully",
+                data: todo
             }
         )
     } catch (error) {
-        res.status(500).json(
-            {
-                success: false,
-                message: error.message
-            }
-        )
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
     }
 }

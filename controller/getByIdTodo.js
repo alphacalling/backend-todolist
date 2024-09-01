@@ -3,7 +3,7 @@ const TodoModel = require("../models/Todo.model");
 exports.getTodoById = async (req, res) => {
     try {
         const id = req.params.id;
-        const todo = await TodoModel.findById({ _id: id });
+        const todo = await TodoModel.findById();
         if (!todo) {
             return res.status(404).json(
                 {
